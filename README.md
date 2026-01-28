@@ -27,7 +27,7 @@ mkdir checkpoints
 cd checkpoints
 ```
 
-10. Download the `DINO` weights from [here](https://drive.google.com/file/d/1UQGCtadrJ2RFZZDrI43wJ0Ed1MJRiDhK/view) and `SAM` weights from [here](https://huggingface.co/HCMUE-Research/SAM-vit-h/blob/main/sam_vit_h_4b8939.pth) onto your local computer, wormhole them over to the cluster within the `checkpoints folder`.
+10. Download the `DINO` weights from [here](https://drive.google.com/file/d/1UQGCtadrJ2RFZZDrI43wJ0Ed1MJRiDhK/view) and `SAM` weights from [here](https://huggingface.co/HCMUE-Research/SAM-vit-h/blob/main/sam_vit_h_4b8939.pth) onto your local computer, wormhole them over to the cluster within the `checkpoints` folder.
 
 6. Clone our repo and move the data and checkpoints.
 ```
