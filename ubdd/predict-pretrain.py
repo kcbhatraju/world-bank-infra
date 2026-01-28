@@ -49,12 +49,12 @@ def get_dino_output(model, image, dino_threshold, postprocessors, device):
     # print(model.parameters())
     image = image.to(device)
     with torch.no_grad():
-        outputs = model(image[None], captions=[DINO_TEXT_PROMPT])
+        outputs = model(image[None])
     
     # h, w = image.shape[-2:]
     outputs = postprocessors["bbox"](outputs, torch.Tensor([[1.0, 1.0]]).to(device))[0]
     scores = outputs["scores"]
-    print(scores)
+    # print(scores)
 
     boxes = box_ops.box_xyxy_to_cxcywh(outputs["boxes"])
     select_mask = scores > dino_threshold
