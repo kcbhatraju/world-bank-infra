@@ -17,13 +17,23 @@ cd tars
 ```
 mv train/ ../xbd/
 mv test/ ../xbd/
-mv hold/ ../
+mv hold/ ../xbd/
+cd ..
 ```
 
-6. Clone our repo and move the data.
+6. Make a directory for model checkpoints, similar to the data.
+```
+mkdir checkpoints
+cd checkpoints
+```
+
+10. Download the `DINO` weights from [here](https://drive.google.com/file/d/1UQGCtadrJ2RFZZDrI43wJ0Ed1MJRiDhK/view) and `SAM` weights from [here](https://huggingface.co/HCMUE-Research/SAM-vit-h/blob/main/sam_vit_h_4b8939.pth) onto your local computer, wormhole them over to the cluster within the `checkpoints folder`.
+
+6. Clone our repo and move the data and checkpoints.
 ```
 git clone https://github.com/kcbhatraju/world-bank-infra.git
 mv xbd/ world-bank-infra/ubdd/
+mv checkpoints/ world-bank-infra/ubdd/
 ```
 
 7. Activate GPU interactive terminal, and move into the correct folder and environment.
@@ -60,11 +70,10 @@ pip install -e . --no-build-isolation
 cd ../ubdd/
 ```
 
-10. Finally, preprocess and evaluate.
+11. Finally, preprocess and evaluate.
 ```
 python3 datasets/preprocess-data.py -tsp xbd/train/ -vsp xbd/test/ -tssp xbd/hold/ -adp xbd/hold/
-CUDA_VISIBLE_DEVICES=0 python predict-pretrain.py   --test-set-path "xbd/test/"   --dino-path "checkpoints/ubdd-dino-resnet.pth"   --dino-config "models/dino/config/DINO_4scale_UBDD_resnet.py"   --sam-path "checkpoints/sam_vit_h_4b8939.pth" --save-annotations
-
+CUDA_VISIBLE_DEVICES=0 python predict-pretrain.py --test-set-path "xbd/test/" --dino-path "checkpoints/ubdd-dino-resnet.pth" --dino-config "models/dino/config/DINO_4scale_UBDD_resnet.py" --sam-path "checkpoints/sam_vit_h_4b8939.pth" --save-annotations
 ```
 
 # Issue
