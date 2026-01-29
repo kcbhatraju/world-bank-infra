@@ -1,6 +1,7 @@
 """
 U-BDD++ Evaluation with pre-trained CLIP
 """
+import os
 import argparse
 import torch
 from torch.utils.data import DataLoader
@@ -200,6 +201,7 @@ def ubdd_plusplus(
 
             file_name = batch["pre_file_name"][0].split("/")[-1][:-4]
             if save_annotations:
+                os.makedirs("outputs/test", exist_ok=True)
                 pred_mask_annotate = pred_mask.cpu().numpy()
                 print(np.unique(pred_mask_annotate))
                 color_mask = np.zeros((1024, 1024, 3), dtype=np.uint8)
